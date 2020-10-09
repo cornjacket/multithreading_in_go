@@ -2,6 +2,7 @@ package main
 
 import (
 	"math/rand"
+	"fmt"
 	"time"
 )
 
@@ -26,9 +27,12 @@ func worker_thread(id int, max_time int) {
 
 func main() {
 	max_time := 10
+	start := time.Now()
 	for i := 0; i < 10; i++ {
 		go worker_thread(i, max_time)
 	}
 	time.Sleep(time.Duration(max_time) * time.Second)
 	println("main done")
+	elapsed := time.Since(start)
+	fmt.Printf("Processing took: %s\n", elapsed)
 }

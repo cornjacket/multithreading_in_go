@@ -1,6 +1,7 @@
 package main
 
 import (
+	"fmt"
 	"math/rand"
 	"sync"
 	"time"
@@ -30,6 +31,7 @@ func worker_thread(id int, max_time int) {
 }
 
 func main() {
+	start := time.Now()
 	max_time := 10
 	for i := 0; i < 10; i++ {
 		waitgroup.Add(1)
@@ -37,4 +39,6 @@ func main() {
 	}
 	waitgroup.Wait()
 	println("main done")
+	elapsed := time.Since(start)
+	fmt.Printf("Processing took %s\n", elapsed)
 }
