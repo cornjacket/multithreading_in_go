@@ -13,7 +13,8 @@ var (
 )
 
 func withdraw_thread() {
-	for i := 0; i < 10000; i++ {
+	println("Withdraw thread start")
+	for i := 0; i < 1000; i++ {
 		lock.Lock()
 		balance -= 10
 		lock.Unlock()
@@ -24,20 +25,21 @@ func withdraw_thread() {
 }
 
 func deposit_thread() {
-	for i := 0; i < 10000; i++ {
+	println("Deposit thread start")
+	for i := 0; i < 1000; i++ {
 		lock.Lock()
 		balance += 10 
 		lock.Unlock()
 		time.Sleep(1 * time.Millisecond)
 	}
-	println("Deposti thread stop")
+	println("Deposit thread stop")
 	deposit_done = true
 }
 
 func main() {
 	go withdraw_thread()
 	go deposit_thread()
-	for ; !withdraw_done && !deposit_done; {
+	for !withdraw_done || !deposit_done {
 		time.Sleep(1000 * time.Millisecond)
 	}
 	print(balance)
