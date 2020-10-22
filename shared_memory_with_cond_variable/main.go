@@ -41,6 +41,7 @@ func deposit_thread() {
 		lock.Lock()
 		balance += 10 
 		println("Deposit thread: ", balance)
+		// Should unlock happen before the signal is invoked. -- DRT
 		moneyAvailable.Signal() // signal the process that is waiting on moneyAvailable
 		lock.Unlock()
 		time.Sleep(1 * time.Millisecond)
