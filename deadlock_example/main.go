@@ -42,7 +42,7 @@ func process2() {
 func main() {
 	go process1()
 	go process2()
-	time.Sleep(20 * time.Second)
+	time.Sleep(5 * time.Second)
 	fmt.Println("Done")
 }
 
